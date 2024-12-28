@@ -8,7 +8,8 @@ import (
 	"github.com/jackc/pgx/v4/pgxpool"
 	"github.com/vakhrushevk/local-platform/db"
 	"github.com/vakhrushevk/local-platform/db/prettier"
-	"log"
+	"github.com/vakhrushevk/local-platform/logger"
+	"log/slog"
 )
 
 type key string
@@ -103,5 +104,5 @@ func MakeContextTx(ctx context.Context, tx pgx.Tx) context.Context {
 
 func logQuery(ctx context.Context, q db.Query, args ...interface{}) {
 	prettyQuery := prettier.Pretty(q.QueryRaw, prettier.PlaceholderDollar, args...)
-	log.Println("sql:", q.Name, prettyQuery)
+	logger.Info(q.Name, slog.Any("query", prettyQuery))
 }
