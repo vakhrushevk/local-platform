@@ -2,6 +2,7 @@ package pg
 
 import (
 	"context"
+	"github.com/pkg/errors"
 
 	"github.com/jackc/pgx/v4/pgxpool"
 	"github.com/vakhrushevk/local-platform/db"
